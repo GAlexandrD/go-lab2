@@ -18,9 +18,9 @@ func (s *MySuite) TestPostfixToPrefix(c *C) {
 }
 
 func ExamplePostfixToPrefix() {
-	res, _ := PostfixToPrefix("+ 2 2")
+	res, _ := PostfixToPrefix("2 2 +")
 	fmt.Println(res)
 
 	// Output:
-	// 2 2 +
+	// + 2 2
 }

@@ -13,12 +13,12 @@ type MySuite struct{}
 
 var _ = Suite(&MySuite{})
 
-func (s *MySuite) TestPrefixToPostfix(c *C) {
+func (s *MySuite) TestPostfixToPrefix(c *C) {
     c.Assert("AAA", Equals, "AAA")
 }
 
-func ExamplePrefixToPostfix() {
-	res, _ := PrefixToPostfix("+ 2 2")
+func ExamplePostfixToPrefix() {
+	res, _ := PostfixToPrefix("+ 2 2")
 	fmt.Println(res)
 
 	// Output:

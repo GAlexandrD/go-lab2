@@ -3,26 +3,53 @@ package main
 import (
 	"flag"
 	"fmt"
-
 	lab2 "github.com/GAlexandrD/go-lab2"
+	"io"
+	"os"
+	"strings"
 )
 
 var (
 	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
+	inputFile       = flag.String("f", "", "File path to the expression data")
+	outputFile      = flag.String("o", "", "File path to write the output")
 )
 
 func main() {
 	flag.Parse()
+	var reader io.Reader = nil
+	var writer io.Writer = os.Stdout
 
-	// TODO: Change this to accept input from the command line arguments as described in the task and
-	//       output the results using the ComputeHandler instance.
-	//       handler := &lab2.ComputeHandler{
-	//           Input: {construct io.Reader according the command line parameters},
-	//           Output: {construct io.Writer according the command line parameters},
-	//       }
-	//       err := handler.Compute()
+	if *inputExpression != "" {
+		reader = strings.NewReader(*inputExpression)
+	} else if *inputFile != "" {
+		file, err := os.OpenFile(*inputFile, os.O_RDONLY, 0777)
+		if err != nil {
+			fmt.Println(err)
+		}
 
-	res, _ := lab2.PostfixToPrefix("+ 2 2")
-	fmt.Println(res)
+		reader = file
+		defer file.Close()
+	}
+
+	if *outputFile != "" {
+		file, err := os.OpenFile(*outputFile, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		writer = file
+		defer file.Close()
+	}
+	handler := &lab2.ComputeHandler{
+		Input:  reader,
+		Output: writer,
+	}
+
+	err := handler.Compute()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
 }

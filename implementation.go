@@ -29,10 +29,12 @@ func PostfixToPrefix(input string) (string, error) {
 			stack = append(stack, el)
 		}
 	}
-	for len(stack) > 0 {
-		result += stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
+
+	if len(stack) != 1 {
+		return "", InvalidExpressionError{}
 	}
+	result += stack[len(stack)-1]
+
 	return result, nil
 }
 

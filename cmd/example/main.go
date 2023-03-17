@@ -31,6 +31,9 @@ func main() {
 
 		reader = file
 		defer file.Close()
+	} else {
+		fmt.Fprint(os.Stderr, "You have to use one of flages -e or -f")
+		return
 	}
 
 	if *outputFile != "" {

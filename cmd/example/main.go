@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	lab2 "github.com/GAlexandrD/go-lab2"
 	"io"
 	"os"
 	"strings"
+
+	lab2 "github.com/GAlexandrD/go-lab2"
 )
 
 var (
@@ -25,7 +26,7 @@ func main() {
 	} else if *inputFile != "" {
 		file, err := os.OpenFile(*inputFile, os.O_RDONLY, 0777)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprint(os.Stderr, err)
 		}
 
 		reader = file
@@ -35,7 +36,7 @@ func main() {
 	if *outputFile != "" {
 		file, err := os.OpenFile(*outputFile, os.O_WRONLY|os.O_CREATE, 0777)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprint(os.Stderr, err)
 		}
 
 		writer = file
@@ -49,7 +50,7 @@ func main() {
 	err := handler.Compute()
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprint(os.Stderr, err)
 	}
 
 }

@@ -47,9 +47,9 @@ func (s *PostfixToPrefixSuite) TestPostfixToPrefix(c *C) {
 }
 
 func ExamplePostfixToPrefix() {
-	res, _ := PostfixToPrefix("2 2 +")
+	res, _ := PostfixToPrefix("4 2 - 3 * 5 +")
 	fmt.Println(res)
 
 	// Output:
-	// + 2 2
+	// + * - 4 2 3 5
 }

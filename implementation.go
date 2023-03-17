@@ -5,8 +5,7 @@ import (
 	"strings"
 )
 
-// TODO: document this function.
-// PostfixToPrefix converts
+// PostfixToPrefix takes postfix notation expression in format "A B +", where A, B - numeric, and converts to prefix notation.
 func PostfixToPrefix(input string) (string, error) {
 	inputElems := strings.Split(input, " ")
 	stack := make([]string, 0)

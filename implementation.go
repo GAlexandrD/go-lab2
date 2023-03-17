@@ -21,7 +21,7 @@ func PostfixToPrefix(input string) (string, error) {
 			newOp := el + " " + operand2 + " " + operand1
 			stack = append(stack, newOp)
 		} else {
-			_, err := strconv.ParseFloat(el, 64);
+			_, err := strconv.ParseFloat(el, 64)
 			if err != nil {
 				return "", InvalidExpressionError{}
 			}
@@ -44,8 +44,7 @@ func isOperator(e string) bool {
 	return false
 }
 
-
-type InvalidExpressionError struct {}
+type InvalidExpressionError struct{}
 
 func (e InvalidExpressionError) Error() string {
 	return "Invalid Expression"
